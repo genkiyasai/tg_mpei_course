@@ -1,0 +1,20 @@
+// https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
+
+class Solution {
+public:
+    int maxAncestorDiff(TreeNode* root) {
+        return find(root, root->val, root->val);
+    }
+    private:
+    int find(TreeNode* root, int m, int n){
+        if (root==NULL) return m-n;
+        n=min(n,root->val);
+        m=max(m,root->val);
+        int k=find(root->right, m, n);
+        int l=find(root->left, m, n);
+        if (k>l) return k;
+        else
+            return l;
+        
+    }
+};
