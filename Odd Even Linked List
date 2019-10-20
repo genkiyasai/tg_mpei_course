@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/odd-even-linked-list/submissions/
+
+class Solution {
+public:
+ListNode* oddEvenList(ListNode* head) {
+if(head == NULL){
+return NULL;
+}
+if(head->next == NULL){
+return head;
+}
+ListNode* res1 = new ListNode(head->val);
+ListNode* r1 = res1;
+ListNode* res2 = new ListNode(head->next->val);
+ListNode* r2 = res2;
+int count = 2;
+if(head->next->next != NULL){
+head = head->next->next;
+while(head != NULL){
+count++;
+if(count % 2 == 0){
+ListNode* next = new ListNode(head->val);
+res2->next = next;
+res2 = next;
+head = head->next;
+}
+else{
+ListNode* next = new ListNode(head->val);
+res1->next = next;
+res1 = next;
+head = head->next;
+}
+}
+}
+res1->next = r2;
+return r1;
+}
+};
